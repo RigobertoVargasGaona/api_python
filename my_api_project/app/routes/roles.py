@@ -11,6 +11,13 @@ def get_db():
         yield db
     finally:
         db.close()
+@rol.get("/get/roles")
+def get_all_roles(db: Session = Depends(get_db)):
+    sql = text("SELECT * FROM roles")
+    result = db.execute(sql).mappings().all()
+    
+    # result es una lista de diccionarios, una por cada fila
+    return [dict(row) for row in result]
 
 @rol.get("/get/rol/{rol_id}")
 def get_rol_by_id(rol_id: int, db: Session = Depends(get_db)):
