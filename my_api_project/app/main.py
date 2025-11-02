@@ -1,13 +1,11 @@
-# app/main.py
-
 from fastapi import FastAPI
-from app.config.db import Base, engine
-from app.routes import roles
+from app.config.database import init_db
+from app.routes import role_routes
 
-# Crea las tablas
-Base.metadata.create_all(bind=engine)
+app = FastAPI(title="API de Roles - MVC con SQL crudo")
 
-app = FastAPI()
+# Inicializamos la base de datos al iniciar
+init_db()
 
-# Montar las rutas del módulo roles
-app.include_router(roles.rol)
+# Registramos las rutas
+app.include_router(role_routes.router)

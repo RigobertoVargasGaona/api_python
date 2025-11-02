@@ -1,7 +1,7 @@
 # app/models/user.py
 
 from sqlalchemy import Column, Integer, String
-from app.config.db import Base
+from app.config.database import Base
 
 class Rol(Base):
     __tablename__ = "roles"
